@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Кейс: оформление группы ВК и сайт для барбершопа «Север».">
+<title>Кейс «Север»</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Раскладка: светлый спокойный лист, на котором тёмные работы стоят как экспонаты; одна колонка, широкие скриншоты */
+:root{
+  --bg:#EEF0EC; --panel:#F8F9F6; --fg:#171B1A; --muted:#56605C; --line:#D0D6CF; --accent:#1F5A4C; --accent-fg:#FFFFFF; --frame:#0E100F;
+  --sans:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#121514; --panel:#1A1E1C; --fg:#E8ECE8; --muted:#9BA5A0; --line:#2C3330; --accent:#73C6AC; --accent-fg:#0E1412; --frame:#000000; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#121514; --panel:#1A1E1C; --fg:#E8ECE8; --muted:#9BA5A0; --line:#2C3330; --accent:#73C6AC; --accent-fg:#0E1412; --frame:#000000; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+.page{max-width:1080px;margin:0 auto;padding-inline:20px;padding-block:56px 80px;display:flex;flex-direction:column;gap:88px}
+h1,h2,h3{margin:0;line-height:1.08;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(36px,6.4vw,68px);font-weight:800}
+h2{font-size:clamp(28px,4vw,42px);font-weight:700}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:58ch}
+.note{color:var(--muted);max-width:62ch}
+
+.hero{display:flex;flex-direction:column;gap:22px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--muted)}
+.tag.concept{border-color:var(--accent);color:var(--accent)}
+
+section{display:flex;flex-direction:column;gap:28px}
+.head{display:flex;flex-direction:column;gap:12px}
+.shot{border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--frame)}
+.shot img{width:100%}
+.cap{font-size:14px;color:var(--muted);margin-top:-16px}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.links a{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:8px;font-weight:600;text-decoration:none;border:1.5px solid var(--accent);color:var(--accent)}
+.links a.main{background:var(--accent);color:var(--accent-fg)}
+.links a:hover{filter:brightness(1.08)}
+.links a:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.vkrow{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:44px;align-items:start}
+.vkrow .done{grid-template-columns:minmax(0,1fr)}
+.vkrow figure{margin:0;display:flex;flex-direction:column;gap:10px}
+.vkrow figcaption{font-size:14px;color:var(--muted)}
+
+.done{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.done li{padding:14px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.done b{font-weight:600}
+.done span{color:var(--muted);font-size:15px}
+
+.cards4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cards6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.cards4 img,.cards6 img{width:100%;border-radius:6px}
+
+.site{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:760px}
+.phone{border-radius:26px;border:7px solid var(--frame);overflow:hidden;background:var(--frame)}
+.phone img{width:100%}
+
+.offer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.pack{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:18px}
+.pack ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:16px}
+.terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:auto;padding-top:18px;border-top:1px solid var(--line)}
+.terms div{display:flex;flex-direction:column;gap:4px}
+.terms small{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.terms b{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.fill{border:1px dashed var(--accent);border-radius:6px;padding:2px 10px;color:var(--accent);font-weight:600;font-size:16px;display:inline-block}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--fg);padding-top:14px}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:13px;color:var(--accent)}
+.steps span{color:var(--muted);font-size:15px}
+
+.contact{background:var(--accent);color:var(--accent-fg);border-radius:14px;padding:36px 32px;display:flex;flex-direction:column;gap:12px}
+.contact .label{color:inherit;opacity:.8}
+.contact .fill{border-color:currentColor;color:inherit}
+
+@media (max-width:760px){
+  .page{gap:64px;padding-block:36px 56px}
+  .done,.offer,.vkrow{grid-template-columns:minmax(0,1fr)}
+  .vkrow figure{max-width:300px}
+  .cards4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards6{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .phones{gap:10px}
+  .phone{border-width:4px;border-radius:16px}
+}
+</style>
+
+</head>
+<body>
+<main class="page">
+
+  <header class="hero">
+    <div class="tags"><span class="tag concept">Концепт</span><span class="tag">Барбершоп</span><span class="tag">Вологда</span></div>
+    <h1>Группа ВК и сайт для барбершопа</h1>
+    <p class="lead">Оформление сообщества «Север» под ключ: обложка, аватар, меню и карточки услуг в одном стиле. К нему одностраничный сайт с прайсом и онлайн-записью.</p>
+    <p class="note">Это концепт, а не заказ клиента: барбершоп «Север» придуман, чтобы показать, как выглядит готовая работа.</p>
+    <div class="links">
+      <a class="main" href="https://egorka-dv.github.io/babershop/" target="_blank" rel="noopener">Открыть сайт</a>
+      <a href="https://vk.ru/club241939325" target="_blank" rel="noopener">Открыть группу ВК</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="head">
+      <span class="label">Часть 1 · Группа ВКонтакте</span>
+      <h2>Группа, в которой видно, куда нажать</h2>
+      <p class="note">Клиент заходит в группу и за несколько секунд понимает, что это за место, сколько стоит стрижка и как записаться.</p>
+    </div>
+    <div class="shot"><img src="img/vk-cover.jpg" alt="Обложка группы «Север»: название, адрес, часы работы и призыв к записи на фоне кресла барбера" width="1600" height="533"></div>
+    <p class="cap">Обложка для компьютера: название, адрес, часы работы и запись.</p>
+
+    <div class="vkrow">
+      <figure>
+        <div class="phone"><img src="img/vk-phone.jpg" alt="Группа «Север» в приложении ВКонтакте на телефоне: обложка, аватар и кнопки" width="720" height="1290" loading="lazy"></div>
+        <figcaption>Так группа выглядит в приложении на телефоне. Для него сделана отдельная вертикальная обложка.</figcaption>
+      </figure>
+      <ul class="done">
+        <li><b>Две обложки</b><span>Горизонтальная для компьютера и вертикальная для телефона, чтобы текст не обрезался.</span></li>
+        <li><b>Аватар</b><span>Логотип, который читается в маленьком кружке в ленте и сообщениях.</span></li>
+        <li><b>Меню из четырёх карточек</b><span>Услуги и цены, запись, работы, контакты. Каждая ведёт в свой раздел.</span></li>
+        <li><b>Карточки услуг</b><span>У каждой услуги своя обложка с ценой и временем.</span></li>
+        <li><b>Описание и настройка разделов</b><span>Продающий текст, услуги, фото и сообщения включены, ссылки в меню проверены.</span></li>
+        <li><b>Шаблон поста</b><span>Квадратный макет в том же стиле для новостей и акций.</span></li>
+      </ul>
+    </div>
+
+    <h3>Меню</h3>
+    <div class="cards4">
+      <img src="img/MenuServices.png" alt="Карточка меню «Услуги и цены»" width="376" height="256" loading="lazy">
+      <img src="img/MenuBooking.png" alt="Карточка меню «Записаться»" width="376" height="256" loading="lazy">
+      <img src="img/MenuWorks.png" alt="Карточка меню «Наши работы»" width="376" height="256" loading="lazy">
+      <img src="img/MenuContacts.png" alt="Карточка меню «Адрес и контакты»" width="376" height="256" loading="lazy">
+    </div>
+
+    <h3>Карточки услуг</h3>
+    <div class="cards6">
+      <img src="img/SvcHaircut.png" alt="Обложка услуги «Мужская стрижка», 1 800 ₽" width="600" height="600" loading="lazy">
+      <img src="img/SvcShave.png" alt="Обложка услуги «Королевское бритьё», 1 500 ₽" width="600" height="600" loading="lazy">
+      <img src="img/SvcBeard.png" alt="Обложка услуги «Моделирование бороды», 1 200 ₽" width="600" height="600" loading="lazy">
+      <img src="img/SvcCombo.png" alt="Обложка услуги «Стрижка + борода», 2 700 ₽" width="600" height="600" loading="lazy">
+      <img src="img/SvcFatherSon.png" alt="Обложка услуги «Отец и сын», 2 900 ₽" width="600" height="600" loading="lazy">
+      <img src="img/SvcGrey.png" alt="Обложка услуги «Камуфляж седины», 1 000 ₽" width="600" height="600" loading="lazy">
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="label">Часть 2 · Сайт</span>
+      <h2>Одна страница, с которой записываются</h2>
+      <p class="note">Услуги, мастера, работы, прайс и форма записи на одной странице. Заявка из формы приходит салону в WhatsApp, отдельный сервер не нужен.</p>
+    </div>
+    <div class="site">
+      <div class="shot"><img src="img/site-desk.jpg" alt="Первый экран сайта барбершопа на компьютере" width="1440" height="900" loading="lazy"></div>
+      <p class="cap" style="margin-top:-8px">Первый экран на компьютере: то же название, цвета и фон, что на обложке группы.</p>
+      <div class="phones">
+        <div class="phone"><img src="img/site-phone.jpg" alt="Первый экран сайта на телефоне с кнопками «Написать в ВК» и «Записаться»" width="780" height="1688" loading="lazy"></div>
+        <div class="phone"><img src="img/site-phone-1.jpg" alt="Раздел «Мастера» на телефоне" width="780" height="1688" loading="lazy"></div>
+        <div class="phone"><img src="img/site-phone-2.jpg" alt="Прайс-лист в виде чека на телефоне" width="780" height="1688" loading="lazy"></div>
+      </div>
+      <p class="cap" style="margin-top:-8px">На телефоне кнопки «Написать в ВК» и «Записаться» всегда под рукой.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="label">Что входит и сколько стоит</span>
+      <h2>Два пакета, вместе или по отдельности</h2>
+    </div>
+    <div class="offer">
+      <div class="pack">
+        <h3>Оформление группы ВК</h3>
+        <ul>
+          <li>Обложка для компьютера и для телефона, аватар</li>
+          <li>Меню: до четырёх карточек с настроенными ссылками</li>
+          <li>Обложки для услуг с вашими ценами</li>
+          <li>Шаблон поста</li>
+          <li>Установка в группу и одна волна правок</li>
+        </ul>
+        <div class="terms">
+          <div><small>Срок</small><span class="fill">укажите срок</span></div>
+          <div><small>Цена</small><span class="fill">укажите цену</span></div>
+        </div>
+      </div>
+      <div class="pack">
+        <h3>Сайт-одностраничник</h3>
+        <ul>
+          <li>Услуги, мастера, работы, прайс, отзывы</li>
+          <li>Форма записи с отправкой заявки в WhatsApp</li>
+          <li>Удобно читается на телефоне</li>
+          <li>Ваши тексты, фото и цены</li>
+          <li>Публикация в интернете и одна волна правок</li>
+        </ul>
+        <div class="terms">
+          <div><small>Срок</small><span class="fill">укажите срок</span></div>
+          <div><small>Цена</small><span class="fill">укажите цену</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <span class="label">Как идёт работа</span>
+      <h2>Четыре шага до готовой группы</h2>
+    </div>
+    <ol class="steps">
+      <li><b>Вопросы</b><span>Услуги, цены, адрес, фото салона и работ.</span></li>
+      <li><b>Макет</b><span>Показываю обложку и меню до оплаты остального.</span></li>
+      <li><b>Правки</b><span>Меняю то, что не подошло.</span></li>
+      <li><b>Установка</b><span>Ставлю в группу и проверяю все ссылки.</span></li>
+    </ol>
+  </section>
+
+  <section class="contact">
+    <span class="label">Связаться</span>
+    <h2>Сделаю такое же для вашего салона</h2>
+    <p><span class="fill">ваше имя и ссылка на ВК или телефон</span></p>
+  </section>
+
+</main>
+
+</body>
+</html>
